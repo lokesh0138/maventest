@@ -9,6 +9,15 @@
                 echo 'Cleaning..'
                 bat 'mvn -B -DskipTests clean'
             }
+            post {
+                success{
+                   slackSend color: '#BADA55', message: 'clean successful!!'
+                }
+                failure{
+                   slackSend color: '#BADA55', message: 'clean failed!!'
+                }
+            }
+         
         }
      
         stage('Package') {
