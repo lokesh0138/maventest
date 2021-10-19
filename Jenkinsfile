@@ -10,17 +10,7 @@
                 bat 'mvn -B -DskipTests clean'
             }
         }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-                bat 'mvn test'
-            }
-             post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
-                }
-            }
-        }
+     
         stage('Package') {
             steps {
                 echo 'mvn install'
@@ -34,6 +24,18 @@
                 }
             }
         }
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+                bat 'mvn test'
+            }
+             post {
+                always {
+                    junit 'target/surefire-reports/*.xml'
+                }
+            }
+        }
+     
 
       
           
