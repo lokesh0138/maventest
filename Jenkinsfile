@@ -24,14 +24,15 @@
             steps {
                 echo 'mvn install'
             }
-            post {
+              post {
                 success{
-                    bat 'echo "Packaging done"'
+                   slackSend color: '#BADA55', message: 'package successful!!'
                 }
                 failure{
-                    bat 'echo "Packaging failure"'
+                   slackSend color: '#BADA55', message: 'package failed!!'
                 }
             }
+         
         }
         stage('Test') {
             steps {
@@ -41,6 +42,12 @@
              post {
                 always {
                     junit 'target/surefire-reports/*.xml'
+                }
+                 success{
+                   slackSend color: '#BADA55', message: 'Test successful!!'
+                }
+                failure{
+                   slackSend color: '#BADA55', message: 'Test failed!!'
                 }
             }
         }
